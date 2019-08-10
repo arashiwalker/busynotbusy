@@ -1,3 +1,0 @@
-arashi read me
-
-

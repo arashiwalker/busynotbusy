@@ -99,106 +99,85 @@
 </div>
 <script>
 
-var map;
-var service;
-var infowindow;
+ var map;
+ var service;
+ var infowindow;
+ var marker;
+ var request;
 
-function initMap() {
-  var pyrmont = new google.maps.LatLng(37.77493,-122.41942);
-  infowindow = new google.maps.InfoWindow();
+ function initMap() {
+   var pyrmont = new google.maps.LatLng(37.77493,-122.41942);
+   infowindow = new google.maps.InfoWindow();
 
-  map = new google.maps.Map(document.getElementById('map'), {
-      center: pyrmont,
-      zoom: 14
-    });
+   map = new google.maps.Map(document.getElementById('map'), {
+     center: pyrmont,
+     zoom: 14
+   });
 
+   request = {
+     location: pyrmont,
+     radius: '2000',
+     type: ['gym']
+   };
 
-  var request = {
-    location: pyrmont,
-    radius: '1000',
-    type: ['gym']
-  };
+   service = new google.maps.places.PlacesService(map);
+   service.nearbySearch(request, callback);
+   var geocoder = new google.maps.Geocoder();
 
-  service = new google.maps.places.PlacesService(map);
-  service.nearbySearch(request, callback);
-  var geocoder = new google.maps.Geocoder();
+   document.getElementById('submit').addEventListener('click', function() {
+     geocodeAddress(geocoder, map);
+   });
+ }
 
-    document.getElementById('submit').addEventListener('click', function() {
-      geocodeAddress(geocoder, map);
-    });
-}
-
-function callback(results, status) {
-  if (status == google.maps.places.PlacesServiceStatus.OK) {
-     console.log(results)
+ function callback(results, status) {
+   if (status == google.maps.places.PlacesServiceStatus.OK) {
+    // console.log(results)
     for (var i = 0; i < results.length; i++) {
-      var place = results[i];
-      createMarker(place);
-    }
-  }
+     var place = results[i];
+     createMarker(place);
+   }
+ }
 }
-
 
 function createMarker(x) {
-  var marker = new google.maps.Marker({
-    map: map,
-    position: x.geometry.location
-  });
+ marker = new google.maps.Marker({
+   map: map,
+   position: x.geometry.location
+ });
+ google.maps.event.addListener(marker, 'click', function() {
+   infowindow.setContent("<h6>" + x.name + "</h6>" + "<b>" + "<p>" + x.vicinity + "</br>" + "</p>" + "Price: " + x.rating.toString(10) + "</b>" );
+   infowindow.open(map, this);
 
-  google.maps.event.addListener(marker, 'click', function() {
-    infowindow.setContent("<b>" + x.name + "</b>" + "<br>" + "<b>"+ x.rating.toString(10) + "</b>" + "</br>");
-    infowindow.open(map, this);
-
-  });
+ });
 }
 
-    function geocodeAddress(geocoder, resultsMap) {
-    var address = document.getElementById('address').value;
-    geocoder.geocode({'address': address}, function(results, status) {
-       if (status === 'OK') {
-        console.log(results)
-         resultsMap.setCenter(results[0].geometry.location);
+function geocodeAddress(geocoder, resultsMap) {
+ var address = document.getElementById('address').value;
+ geocoder.geocode({'address': address}, function(results, status) {
+  if (status === 'OK') {
+   // console.log(results)
+   resultsMap.setCenter(results[0].geometry.location);  
 
-       } else {
-         alert('Geocode was not successful for the following reason: ' + status);
-       }
-     });
-   }
+   request = {
+     location: results[0].geometry.location,
+     radius: '2000',
+     type: ['gym']
+   }; 
 
-// function initMap() {
-//   var london = {
-//     lat: 51.5073509,
-//     lng: -0.12775829999998223
-//   };
-//   if (navigator.geolocation) {
-//     navigator.geolocation.getCurrentPosition(function(position) {
-//       london = {
-//         lat: position.coords.latitude,
-//         lng: position.coords.longitude
-//       };
-//       map.setCenter(london);
-//       setPlaces(london);
-//     });
-//   } else {
-//     // Browser doesn't support Geolocation   
-//     //since you set coords above this section it will default to that
-//     setPlaces(london);      
-//   }
-//   map = new google.maps.Map(document.getElementById('map'), {
-//     center: london,
-//     zoom: 15
-//   });      
-// }
+   // pyrmont = results[0].geometry.location;
 
-// function setPlaces(location) {
-//   infowindow = new google.maps.InfoWindow();
-//   var service = new google.maps.places.PlacesService(map);
-//   service.nearbySearch({
-//     location: location,
-//     radius: 1000,
-//     type: ['store']
-//   }, callback);
-// }
+
+   service = new google.maps.places.PlacesService(map);
+   service.nearbySearch(request, callback);
+   console.log(resultsMap)
+   console.log(request)
+
+ } else {
+  alert('Geocode was not successful for the following reason: ' + status);
+}
+});
+}
+
 
 
 

@@ -12,10 +12,12 @@
 <!--     Fonts and icons     -->
 <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons" />
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css">
+<script src="https://kit.fontawesome.com/fe71b363d1.js"></script>
 <!-- CSS Files -->
 <link href="assets/css/material-dashboard.css?v=2.1.1" rel="stylesheet" />
 <!-- CSS Just for demo purpose, don't include it in your project -->
 <link href="assets/demo/demo.css" rel="stylesheet" />
+
 </head>
 
 <body class="">
@@ -36,9 +38,9 @@
             </a>
           </li>
           <li class="nav-item ">
-            <a class="nav-link" href="./popularplaces.html">
+            <a class="nav-link" href="./nearbyme.html">
               <i class="material-icons">content_paste</i>
-              <p>Popular Places</p>
+              <p>Nearby Me</p>
             </a>
           </li>
           <li class="nav-item active">
@@ -70,16 +72,16 @@
 
               <div class="input-group no-border">
                 <input id="address" type="text" value="" class="form-control" placeholder="Search...">
-                <button id="submit" type="submit" class="btn btn-white btn-round btn-just-icon">
-                  <i class="material-icons">search</i>
+                <button id="submit1" type="submit" class="btn btn-white btn-round btn-just-icon" >
+                  <i class="material-icons">fastfood</i>
                   <div class="ripple-container"></div>
                 </button>
-                <button id="submit" type="submit" class="btn btn-white btn-round btn-just-icon">
-                  <i class="material-icons">search</i>
+                <button id="submit2" type="submit" class="btn btn-white btn-round btn-just-icon">
+                  <i class="material-icons">local_bar</i>
                   <div class="ripple-container"></div>
                 </button>
-                <button id="submit" type="submit" class="btn btn-white btn-round btn-just-icon">
-                  <i class="material-icons">search</i>
+                <button id="submit3" type="submit" class="btn btn-white btn-round btn-just-icon">
+                  <i class="material-icons">local_grocery_store</i>
                   <div class="ripple-container"></div>
                 </button>
               </div>
@@ -112,29 +114,46 @@
  var infowindow;
  var marker;
  var request;
+ var markers = [];
 
  function initMap() {
-   var pyrmont = new google.maps.LatLng(37.77493,-122.41942);
+   var SF = new google.maps.LatLng(37.77493,-122.41942);
    infowindow = new google.maps.InfoWindow();
 
    map = new google.maps.Map(document.getElementById('map'), {
-     center: pyrmont,
+     center: SF,
      zoom: 14,
-     mapTypeControl: false
+     // disableDefaultUI: true, 
+     mapTypeControl: false,
+     scaleControl: false,
+     fullscreenControl: false
    });
 
+   //https://developers.google.com/maps/documentation/javascript/controls
+   //mapcontrol features go to site above
+
    request = {
-     location: pyrmont,
+     location: SF,
      radius: '2000',
-     type: ['restaurants']
+     type: ['restaurant']
    };
 
    service = new google.maps.places.PlacesService(map);
    service.nearbySearch(request, callback);
    var geocoder = new google.maps.Geocoder();
 
-   document.getElementById('submit').addEventListener('click', function() {
-     geocodeAddress(geocoder, map);
+    map.addListener('rightclick', function(event) {
+          addMarker(event.latLng);
+        });
+
+   document.getElementById('submit1').addEventListener('click', function() {
+     geocodeAddress1(geocoder, map);
+   });
+   document.getElementById('submit2').addEventListener('click', function() {
+     geocodeAddress2(geocoder, map);
+   });
+   document.getElementById('submit3').addEventListener('click', function() {
+     geocodeAddress3(geocoder, map);
    });
  }
 
@@ -160,27 +179,21 @@ function createMarker(x) {
  });
 }
 
-function geocodeAddress(geocoder, resultsMap) {
+function geocodeAddress1(geocoder, resultsMap) {
  var address = document.getElementById('address').value;
  geocoder.geocode({'address': address}, function(results, status) {
   if (status === 'OK') {
-   // console.log(results)
    resultsMap.setCenter(results[0].geometry.location); 
-   resultsMap.setZoom(13);
+   resultsMap.setZoom(14);
 
    request = {
      location: results[0].geometry.location,
      radius: '2000',
-     type: ['gym']
+     type: ['restaurant']
    }; 
-
-   // pyrmont = results[0].geometry.location;
-
 
    service = new google.maps.places.PlacesService(resultsMap);
    service.nearbySearch(request, callback);
-   console.log(resultsMap)
-   console.log(request)
 
  } else {
   alert('Geocode was not successful for the following reason: ' + status);
@@ -188,7 +201,65 @@ function geocodeAddress(geocoder, resultsMap) {
 });
 }
 
+function geocodeAddress2(geocoder, resultsMap) {
+ var address = document.getElementById('address').value;
+ geocoder.geocode({'address': address}, function(results, status) {
+  if (status === 'OK') {
+   resultsMap.setCenter(results[0].geometry.location); 
+   resultsMap.setZoom(14);
 
+   request = {
+     location: results[0].geometry.location,
+     radius: '2000',
+     type: ['night_club']
+   }; 
+
+   service = new google.maps.places.PlacesService(resultsMap);
+   service.nearbySearch(request, callback);
+
+ } else {
+  alert('Geocode was not successful for the following reason: ' + status);
+}
+});
+}
+
+function geocodeAddress3(geocoder, resultsMap) {
+ var address = document.getElementById('address').value;
+ geocoder.geocode({'address': address}, function(results, status) {
+  if (status === 'OK') {
+   resultsMap.setCenter(results[0].geometry.location); 
+   resultsMap.setZoom(14);
+
+   request = {
+     location: results[0].geometry.location,
+     radius: '2000',
+     type: ['supermarket']
+   }; 
+
+   service = new google.maps.places.PlacesService(resultsMap);
+   service.nearbySearch(request, callback);
+
+ } else {
+  alert('Geocode was not successful for the following reason: ' + status);
+}
+});
+}
+
+// Adds a marker to the map and push to the array.
+function addMarker(location) {
+        var marker = new google.maps.Marker({
+          position: location,
+          map: map
+        });
+        markers.push(marker);
+      }
+
+// Sets the map on all markers in the array.
+ function setMapOnAll(map) {
+        for (var i = 0; i < markers.length; i++) {
+          markers[i].setMap(map);
+        }
+      }      
 
 
 </script>

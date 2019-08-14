@@ -62,7 +62,7 @@
         </ul>
       </div>
     </div>
-    <div class="main-panel">
+    <div class="main-panel ">
       <!-- Navbar -->
       <nav class="navbar navbar-expand-lg navbar-transparent navbar-absolute fixed-top ">
         <div class="container-fluid">
@@ -70,6 +70,14 @@
 
               <div class="input-group no-border">
                 <input id="address" type="text" value="" class="form-control" placeholder="Search...">
+                <button id="submit" type="submit" class="btn btn-white btn-round btn-just-icon">
+                  <i class="material-icons">search</i>
+                  <div class="ripple-container"></div>
+                </button>
+                <button id="submit" type="submit" class="btn btn-white btn-round btn-just-icon">
+                  <i class="material-icons">search</i>
+                  <div class="ripple-container"></div>
+                </button>
                 <button id="submit" type="submit" class="btn btn-white btn-round btn-just-icon">
                   <i class="material-icons">search</i>
                   <div class="ripple-container"></div>
@@ -111,7 +119,8 @@
 
    map = new google.maps.Map(document.getElementById('map'), {
      center: pyrmont,
-     zoom: 14
+     zoom: 14,
+     mapTypeControl: false
    });
 
    request = {
@@ -156,7 +165,8 @@ function geocodeAddress(geocoder, resultsMap) {
  geocoder.geocode({'address': address}, function(results, status) {
   if (status === 'OK') {
    // console.log(results)
-   resultsMap.setCenter(results[0].geometry.location);  
+   resultsMap.setCenter(results[0].geometry.location); 
+   resultsMap.setZoom(13);
 
    request = {
      location: results[0].geometry.location,
@@ -164,14 +174,10 @@ function geocodeAddress(geocoder, resultsMap) {
      type: ['gym']
    }; 
 
-map = new google.maps.Map(document.getElementById('map'), {
-     center: results[0].geometry.location,
-     zoom: 14
-   });
    // pyrmont = results[0].geometry.location;
 
 
-   service = new google.maps.places.PlacesService(map);
+   service = new google.maps.places.PlacesService(resultsMap);
    service.nearbySearch(request, callback);
    console.log(resultsMap)
    console.log(request)

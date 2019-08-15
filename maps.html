@@ -18,6 +18,9 @@
 <!-- CSS Just for demo purpose, don't include it in your project -->
 <link href="assets/demo/demo.css" rel="stylesheet" />
 
+<!-- <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBY4U1wnLT6sSZtTMPYZf0KweU5jRSl_FM&libraries=places&callback=initMap"
+async defer></script> -->
+
 </head>
 
 <body class="">
@@ -84,6 +87,9 @@
                   <i class="material-icons">local_grocery_store</i>
                   <div class="ripple-container"></div>
                 </button>
+                <button id="click-button">click</button> 
+                <button id="reset-button">reset</button>               
+                <p id="number"></p>
               </div>
             <!-- <div id="floating-panel">
               <input id="address"  type="textbox" value="Sanfrancisco, CA">
@@ -107,7 +113,75 @@
   <div id="map"></div>
 </div>
 </div>
+ <script src="https://www.gstatic.com/firebasejs/4.12.0/firebase.js"></script>
+  <!-- Firebase JavaScript Link -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
 <script>
+
+
+  // Your web app's Firebase configuration
+  var firebaseConfig = {
+    apiKey: "AIzaSyB3b6UavX4p0zug5iP5BnPas8kVcORjdfo",
+    authDomain: "busynotbusy-24279.firebaseapp.com",
+    databaseURL: "https://busynotbusy-24279.firebaseio.com",
+    projectId: "busynotbusy-24279",
+    storageBucket: "",
+    messagingSenderId: "810742588455",
+    appId: "1:810742588455:web:7c68e007157a72ad"
+  };
+  // Initialize Firebase
+  firebase.initializeApp(firebaseConfig);
+   
+// Get a reference to the database service
+ var database = firebase.database();
+ var clickCounter;
+
+    database.ref().on("value", function(snapshot) {
+      if (snapshot.val().counter){
+        clickCounter = snapshot.val().counter;
+      }else {
+        clickCounter = 100;
+      }
+
+      $('#number').text(clickCounter);
+    });
+
+   // On Click
+    $("#click-button").on("click", function() {
+
+      // Subtract 1 to clickCounter
+      clickCounter--;
+
+      // **** Store Click Data to Firebase in a JSON property called clickCount *****
+      // **** Note how we are using the Firebase .set() method ****
+      // **** .ref() refers to the path you want to save your data to
+      // **** Since we left .ref() blank, it will save to the root directory
+      database.ref().set({
+        counter: clickCounter
+      });
+
+      $('#number').text(clickCounter);
+
+    });
+
+    // On Click
+    $("#reset-button").on("click", function() {
+
+      // reset variable
+      clickCounter = 100;
+
+      // **** Store Click Data to Firebase in a JSON property called clickCount *****
+      // **** Note how we are using the Firebase .set() method ****
+      // **** .ref() refers to the path you want to save your data to
+      // **** Since we left .ref() blank, it will save to the root directory
+      database.ref().set({
+        counter: clickCounter
+      });
+
+      $('#number').text(clickCounter);
+
+    });
 
  var map;
  var service;
@@ -144,6 +218,7 @@
 
     map.addListener('rightclick', function(event) {
           addMarker(event.latLng);
+          
         });
 
    document.getElementById('submit1').addEventListener('click', function() {
@@ -155,6 +230,7 @@
    document.getElementById('submit3').addEventListener('click', function() {
      geocodeAddress3(geocoder, map);
    });
+
  }
 
  function callback(results, status) {
@@ -250,6 +326,7 @@ function addMarker(location) {
         var marker = new google.maps.Marker({
           position: location,
           map: map
+
         });
         markers.push(marker);
       }
@@ -263,10 +340,15 @@ function addMarker(location) {
 
 
 </script>
+<!-- google calls -->
+
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBY4U1wnLT6sSZtTMPYZf0KweU5jRSl_FM&libraries=places&callback=initMap"
 async defer></script>
-<!--   Core JS Files   -->
-<script src="assets/js/core/jquery.min.js"></script>
+<!-- TODO: Add SDKs for Firebase products that you want to use
+     https://firebase.google.com/docs/web/setup#config-web-app -->
+  
+
+
 <script src="assets/js/core/popper.min.js"></script>
 <script src="assets/js/core/bootstrap-material-design.min.js"></script>
 <script src="assets/js/plugins/perfect-scrollbar.jquery.min.js"></script>

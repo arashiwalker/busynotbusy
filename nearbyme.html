@@ -30,31 +30,31 @@
       <div class="sidebar-wrapper">
         <ul class="nav">
           <li class="nav-item ">
-            <a class="nav-link" href="./index.html">
+            <a id="B1" class="nav-link" href="./index.html">
               <i class="material-icons">home</i>
               <p>Home</p>
             </a>
           </li>
           <li class="nav-item active ">
-            <a class="nav-link" href="./nearbyme.html">
+            <a id="B2" class="nav-link" href="./nearbyme.html">
               <i class="material-icons">content_paste</i>
               <p>Nearby Me</p>
             </a>
           </li>
           <li class="nav-item ">
-            <a class="nav-link" href="./maps.html">
+            <a id="B3" class="nav-link" href="./maps.html">
               <i class="material-icons">location_ons</i>
               <p>Maps</p>
             </a>
           </li>
           <li class="nav-item ">
-            <a class="nav-link" href="./teambusy.html">
+            <a id="B4" class="nav-link" href="./teambusy.html">
               <i class="material-icons">group</i>
               <p>TeamBusy</p>
             </a>
           </li>
           <li class="nav-item ">
-            <a class="nav-link" href="./settings.html">
+            <a id="B5" class="nav-link" href="./settings.html">
               <i class="material-icons">settings</i>
               <p>Settings</p>
             </a>
@@ -185,6 +185,138 @@
   <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBY4U1wnLT6sSZtTMPYZf0KweU5jRSl_FM&libraries=places&callback=initMap"
   async defer></script>
   <script>
+     // Your web app's Firebase configuration
+  var firebaseConfig = {
+    apiKey: "AIzaSyB3b6UavX4p0zug5iP5BnPas8kVcORjdfo",
+    authDomain: "busynotbusy-24279.firebaseapp.com",
+    databaseURL: "https://busynotbusy-24279.firebaseio.com",
+    projectId: "busynotbusy-24279",
+    storageBucket: "",
+    messagingSenderId: "810742588455",
+    appId: "1:810742588455:web:7c68e007157a72ad"
+  };
+  // Initialize Firebase
+  firebase.initializeApp(firebaseConfig);
+
+// Get a reference to the database service
+var database = firebase.database();
+var restaurantCounter = 0;
+var clubCounter = 0;
+var groceryCounter = 0;
+var busyHome = 0;
+var busyNearbyMe = 0;
+var busyMaps = 0;
+var busyTeamBusy = 0;
+var busySettings = 0;
+
+//firebase navbar functions bro
+  database.ref('busynotbusy/Home').on("value", function(snapshot) {
+      if (snapshot.val().counter){
+        busyHome = snapshot.val().counter;
+      }
+    });
+
+    $("#B1").on("click", function() {
+      busyHome++;
+      database.ref('busynotbusy/Home').set({
+        counter: busyHome
+      });
+    });
+
+      database.ref('busynotbusy/Nearbyme').on("value", function(snapshot) {
+      if (snapshot.val().counter){
+        busyNearbyMe = snapshot.val().counter;
+      }
+    });
+
+    $("#B2").on("click", function() {
+      busyNearbyMe++;
+      database.ref('busynotbusy/Nearbyme').set({
+        counter: busyNearbyMe
+      });
+    });
+
+      database.ref('busynotbusy/Maps').on("value", function(snapshot) {
+      if (snapshot.val().counter){
+        busyMaps = snapshot.val().counter;
+      }
+    });
+
+    $("#B3").on("click", function() {
+      busyMaps++;
+      database.ref('busynotbusy/Maps').set({
+        counter: busyMaps
+      });
+    });
+
+      database.ref('busynotbusy/TeamBusy').on("value", function(snapshot) {
+      if (snapshot.val().counter){
+        busyTeamBusy = snapshot.val().counter;
+      }
+    });
+
+    $("#B4").on("click", function() {
+      busyTeamBusy++;
+      database.ref('busynotbusy/TeamBusy').set({
+        counter: busyTeamBusy
+      });
+    });
+
+      database.ref('busynotbusy/TeamBusy').on("value", function(snapshot) {
+      if (snapshot.val().counter){
+        busySettings = snapshot.val().counter;
+      }
+    });
+
+    $("#B5").on("click", function() {
+      busySettings++;
+      database.ref('busynotbusy/Settings').set({
+        counter: busySettings
+      });
+    });
+
+    //nearbyme page fire base functions 
+
+    database.ref('nearbyme/Settings').on("value", function(snapshot) {
+      if (snapshot.val().counter){
+        restaurantCounter = snapshot.val().counter;
+      }
+
+    });
+   // On Click
+    $("#restaurants").on("click", function() {
+      restaurantCounter++;
+      database.ref('nearbyme/restaurant').set({
+        counter: restaurantCounter
+      });
+    });
+
+    database.ref('nearbyme/nightClub').on("value", function(snapshot) {
+      if (snapshot.val().counter){
+        clubCounter = snapshot.val().counter;
+      }
+    });
+   // On Click
+    $("#bars").on("click", function() {
+      clubCounter++;
+      database.ref('nearbyme/nightClub').set({
+        counter: clubCounter
+      });
+    });
+
+    database.ref('nearbyme/grocery').on("value", function(snapshot) {
+      if (snapshot.val().counter){
+        groceryCounter = snapshot.val().counter;
+      }
+    });
+   // On Click
+    $("#grocery").on("click", function() {
+      groceryCounter++;
+      database.ref('nearbyme/grocery').set({
+        counter: groceryCounter
+      });
+    });
+
         // Gets the value of the search and populates in table and google api
         function searchCity(searchVal) {
 

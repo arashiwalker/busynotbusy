@@ -29,31 +29,31 @@
       <div class="sidebar-wrapper">
         <ul class="nav">
           <li class="nav-item ">
-            <a class="nav-link" href="./index.html">
+            <a id="B1" class="nav-link" href="./index.html">
               <i class="material-icons">home</i>
               <p>Home</p>
             </a>
           </li>
           <li class="nav-item ">
-            <a class="nav-link" href="./nearbyme.html">
+            <a id="B2" class="nav-link" href="./nearbyme.html">
               <i class="material-icons">content_paste</i>
               <p>Nearby Me</p>
             </a>
           </li>
           <li class="nav-item active">
-            <a class="nav-link" href="./map.html">
+            <a id="B3" class="nav-link" href="./maps.html">
               <i class="material-icons">location_ons</i>
               <p>Maps</p>
             </a>
           </li>
           <li class="nav-item ">
-            <a class="nav-link" href="./teambusy.html">
+            <a id="B4" class="nav-link" href="./teambusy.html">
               <i class="material-icons">group</i>
               <p>TeamBusy</p>
             </a>
           </li>
           <li class="nav-item ">
-            <a class="nav-link" href="./settings.html">
+            <a id="B5" class="nav-link" href="./settings.html">
               <i class="material-icons">settings</i>
               <p>Settings</p>
             </a>
@@ -126,31 +126,79 @@ var database = firebase.database();
 var restaurantCounter = 0;
 var clubCounter = 0;
 var gymCounter = 0;
+var busyHome = 0;
+var busyNearbyMe = 0;
+var busyMaps = 0;
+var busyTeamBusy = 0;
+var busySettings = 0;
 
-// var ref = database.ref('scores');
-// ref.on('value', gotData, errData);
+//firebase navbar functions bro
+  database.ref('busynotbusy/Home').on("value", function(snapshot) {
+      if (snapshot.val().counter){
+        busyHome = snapshot.val().counter;
+      }
+    });
 
-//     function gotData(data) {
+    $("#B1").on("click", function() {
+      busyHome++;
+      database.ref('busynotbusy/Home').set({
+        counter: busyHome
+      });
+    });
 
-//       var scorelistings = selectAll('.scorelisting');
-//       for (var i = 0; i < scorelistings.length; i++) {
-//         scorelistings[i].remove();
-//       }
+      database.ref('busynotbusy/Nearbyme').on("value", function(snapshot) {
+      if (snapshot.val().counter){
+        busyNearbyMe = snapshot.val().counter;
+      }
+    });
 
-//       var scores = data.val();
-//       var keys = Object.keys(scores);
-//       console.log(keys);
-//       for (var i = 0; i < keys.length; i++) {
-//         var k = keys [i];
-//         var initials = scores[k].score;
-//         //console.log(initials, score);
-//         var li = createElement('li', initials + ':' + score);
-//         li.class('scorelisting');
-//         li.parent('scorelist');
-//       }
-//     }
+    $("#B2").on("click", function() {
+      busyNearbyMe++;
+      database.ref('busynotbusy/Nearbyme').set({
+        counter: busyNearbyMe
+      });
+    });
 
-//firebase functions bro
+      database.ref('busynotbusy/Maps').on("value", function(snapshot) {
+      if (snapshot.val().counter){
+        busyMaps = snapshot.val().counter;
+      }
+    });
+
+    $("#B3").on("click", function() {
+      busyMaps++;
+      database.ref('busynotbusy/Maps').set({
+        counter: busyMaps
+      });
+    });
+
+      database.ref('busynotbusy/TeamBusy').on("value", function(snapshot) {
+      if (snapshot.val().counter){
+        busyTeamBusy = snapshot.val().counter;
+      }
+    });
+
+    $("#B4").on("click", function() {
+      busyTeamBusy++;
+      database.ref('busynotbusy/TeamBusy').set({
+        counter: busyTeamBusy
+      });
+    });
+
+      database.ref('busynotbusy/TeamBusy').on("value", function(snapshot) {
+      if (snapshot.val().counter){
+        busySettings = snapshot.val().counter;
+      }
+    });
+
+    $("#B5").on("click", function() {
+      busySettings++;
+      database.ref('busynotbusy/Settings').set({
+        counter: busySettings
+      });
+    });
+
+//firebase map button tracking bro
     database.ref('map/restaurant').on("value", function(snapshot) {
       console.log('read restaurant')
       if (snapshot.val().counter){
@@ -194,6 +242,30 @@ var gymCounter = 0;
         counter: gymCounter
       });
     });
+
+//possible solution for input texts
+// var ref = database.ref('scores');
+// ref.on('value', gotData, errData);
+
+//     function gotData(data) {
+
+//       var scorelistings = selectAll('.scorelisting');
+//       for (var i = 0; i < scorelistings.length; i++) {
+//         scorelistings[i].remove();
+//       }
+
+//       var scores = data.val();
+//       var keys = Object.keys(scores);
+//       console.log(keys);
+//       for (var i = 0; i < keys.length; i++) {
+//         var k = keys [i];
+//         var initials = scores[k].score;
+//         //console.log(initials, score);
+//         var li = createElement('li', initials + ':' + score);
+//         li.class('scorelisting');
+//         li.parent('scorelist');
+//       }
+//     }
 
 var map;
 var service;

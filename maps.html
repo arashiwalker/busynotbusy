@@ -8,15 +8,15 @@
  <title>
   BusynotBusy
 </title>
-<meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no' name='viewport' />
-<!--     Fonts and icons     -->
-<link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons" />
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css">
-<script src="https://kit.fontawesome.com/fe71b363d1.js"></script>
-<!-- CSS Files -->
-<link href="assets/css/material-dashboard.css?v=2.1.1" rel="stylesheet" />
-<!-- CSS Just for demo purpose, don't include it in your project -->
-<link href="assets/demo/demo.css" rel="stylesheet" />
+ <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no' name='viewport' />
+ <!--     Fonts and icons     -->
+ <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons" />
+ <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css">
+ <script src="https://kit.fontawesome.com/fe71b363d1.js"></script>
+ <!-- CSS Files -->
+ <link href="assets/css/material-dashboard.css?v=2.1.1" rel="stylesheet" />
+ <!-- CSS Just for demo purpose, don't include it in your project -->
+ <link href="assets/demo/demo.css" rel="stylesheet" />
 </head>
 <body class="">
   <div class="wrapper ">
@@ -95,7 +95,6 @@
     </div>
   </nav>
   <!-- End Navbar --> 
- 
   <div id="map"></div>
 </div>
 </div>
@@ -108,18 +107,18 @@
 async defer></script>
 
 <script>
-  // Your web app's Firebase configuration
-  var firebaseConfig = {
-    apiKey: "AIzaSyB3b6UavX4p0zug5iP5BnPas8kVcORjdfo",
-    authDomain: "busynotbusy-24279.firebaseapp.com",
-    databaseURL: "https://busynotbusy-24279.firebaseio.com",
-    projectId: "busynotbusy-24279",
-    storageBucket: "",
-    messagingSenderId: "810742588455",
-    appId: "1:810742588455:web:7c68e007157a72ad"
-  };
-  // Initialize Firebase
-  firebase.initializeApp(firebaseConfig);
+    // Your web app's Firebase configuration
+    var firebaseConfig = {
+        apiKey: "AIzaSyB3b6UavX4p0zug5iP5BnPas8kVcORjdfo",
+        authDomain: "busynotbusy-24279.firebaseapp.com",
+        databaseURL: "https://busynotbusy-24279.firebaseio.com",
+        projectId: "busynotbusy-24279",
+        storageBucket: "",
+        messagingSenderId: "810742588455",
+        appId: "1:810742588455:web:7c68e007157a72ad"
+    };
+// Initialize Firebase
+firebase.initializeApp(firebaseConfig);
 
 // Get a reference to the database service
 var database = firebase.database();
@@ -132,118 +131,118 @@ var busyMaps = 0;
 var busyTeamBusy = 0;
 var busySettings = 0;
 
-//firebase navbar functions bro
-  database.ref('busynotbusy/Home').on("value", function(snapshot) {
-      if (snapshot.val().counter){
+//firebase navbar functions 
+database.ref('busynotbusy/Home').on("value", function(snapshot) {
+    if (snapshot.val().counter) {
         busyHome = snapshot.val().counter;
-      }
-    });
+    }
+});
 
-    $("#B1").on("click", function() {
-      busyHome++;
-      database.ref('busynotbusy/Home').set({
+$("#B1").on("click", function() {
+    busyHome++;
+    database.ref('busynotbusy/Home').set({
         counter: busyHome
-      });
     });
+});
 
-      database.ref('busynotbusy/Nearbyme').on("value", function(snapshot) {
-      if (snapshot.val().counter){
+database.ref('busynotbusy/Nearbyme').on("value", function(snapshot) {
+    if (snapshot.val().counter) {
         busyNearbyMe = snapshot.val().counter;
-      }
-    });
+    }
+});
 
-    $("#B2").on("click", function() {
-      busyNearbyMe++;
-      database.ref('busynotbusy/Nearbyme').set({
+$("#B2").on("click", function() {
+    busyNearbyMe++;
+    database.ref('busynotbusy/Nearbyme').set({
         counter: busyNearbyMe
-      });
     });
+});
 
-      database.ref('busynotbusy/Maps').on("value", function(snapshot) {
-      if (snapshot.val().counter){
+database.ref('busynotbusy/Maps').on("value", function(snapshot) {
+    if (snapshot.val().counter) {
         busyMaps = snapshot.val().counter;
-      }
-    });
+    }
+});
 
-    $("#B3").on("click", function() {
-      busyMaps++;
-      database.ref('busynotbusy/Maps').set({
+$("#B3").on("click", function() {
+    busyMaps++;
+    database.ref('busynotbusy/Maps').set({
         counter: busyMaps
-      });
     });
+});
 
-      database.ref('busynotbusy/TeamBusy').on("value", function(snapshot) {
-      if (snapshot.val().counter){
+database.ref('busynotbusy/TeamBusy').on("value", function(snapshot) {
+    if (snapshot.val().counter) {
         busyTeamBusy = snapshot.val().counter;
-      }
-    });
+    }
+});
 
-    $("#B4").on("click", function() {
-      busyTeamBusy++;
-      database.ref('busynotbusy/TeamBusy').set({
+$("#B4").on("click", function() {
+    busyTeamBusy++;
+    database.ref('busynotbusy/TeamBusy').set({
         counter: busyTeamBusy
-      });
     });
+});
 
-      database.ref('busynotbusy/TeamBusy').on("value", function(snapshot) {
-      if (snapshot.val().counter){
+database.ref('busynotbusy/TeamBusy').on("value", function(snapshot) {
+    if (snapshot.val().counter) {
         busySettings = snapshot.val().counter;
-      }
-    });
+    }
+});
 
-    $("#B5").on("click", function() {
-      busySettings++;
-      database.ref('busynotbusy/Settings').set({
+$("#B5").on("click", function() {
+    busySettings++;
+    database.ref('busynotbusy/Settings').set({
         counter: busySettings
-      });
     });
+});
 
 //firebase map button tracking bro
-    database.ref('map/restaurant').on("value", function(snapshot) {
-      console.log('read restaurant')
-      if (snapshot.val().counter){
+database.ref('map/restaurant').on("value", function(snapshot) {
+    console.log('read restaurant')
+    if (snapshot.val().counter) {
         restaurantCounter = snapshot.val().counter;
-      }
+    }
 
-    });
-   // On Click
-    $("#submit1").on("click", function() {
-      restaurantCounter++;
-      database.ref('map/restaurant').set({
+});
+// On Click
+$("#submit1").on("click", function() {
+    restaurantCounter++;
+    database.ref('map/restaurant').set({
         counter: restaurantCounter
-      });
     });
+});
 
-    database.ref('map/nightClub').on("value", function(snapshot) {
-      console.log('read nightClub')
-      if (snapshot.val().counter){
+database.ref('map/nightClub').on("value", function(snapshot) {
+    console.log('read nightClub')
+    if (snapshot.val().counter) {
         clubCounter = snapshot.val().counter;
-      }
-    });
-   // On Click
-    $("#submit2").on("click", function() {
-      clubCounter++;
-      console.log('clubCounter value:' + clubCounter)
-      database.ref('map/nightClub').set({
+    }
+});
+// On Click
+$("#submit2").on("click", function() {
+    clubCounter++;
+    console.log('clubCounter value:' + clubCounter)
+    database.ref('map/nightClub').set({
         counter: clubCounter
-      });
     });
+});
 
-    database.ref('map/gym').on("value", function(snapshot) {
-      console.log("read gym")
-      if (snapshot.val().counter){
+database.ref('map/gym').on("value", function(snapshot) {
+    console.log("read gym")
+    if (snapshot.val().counter) {
         gymCounter = snapshot.val().counter;
-      }
-    });
-   // On Click
-    $("#submit3").on("click", function() {
-      gymCounter++;
-      database.ref('map/gym').set({
+    }
+});
+// On Click
+$("#submit3").on("click", function() {
+    gymCounter++;
+    database.ref('map/gym').set({
         counter: gymCounter
-      });
     });
+});
 
-//possible solution for input texts
+// possible solution for input texts
 // var ref = database.ref('scores');
 // ref.on('value', gotData, errData);
 
@@ -276,189 +275,188 @@ var markers = [];
 
 //initiates google maps
 function initMap() {
- var SF = new google.maps.LatLng(37.77493,-122.41942);
- infowindow = new google.maps.InfoWindow();
+    var SF = new google.maps.LatLng(37.77493, -122.41942);
+    infowindow = new google.maps.InfoWindow();
 
-//https://developers.google.com/maps/documentation/javascript/controls
-//mapcontrol features go to site above
- map = new google.maps.Map(document.getElementById('map'), {
-   center: SF,
-   zoom: 14,
-     // disableDefaultUI: true, 
-     mapTypeControl: false,
-     scaleControl: false,
-     fullscreenControl: false
-   });
+    //https://developers.google.com/maps/documentation/javascript/controls
+    //mapcontrol features go to site above
+    map = new google.maps.Map(document.getElementById('map'), {
+        center: SF,
+        zoom: 14,
+        // disableDefaultUI: true, 
+        mapTypeControl: false,
+        scaleControl: false,
+        fullscreenControl: false
+    });
 
-   request = {
-     location: SF,
-     radius: '2000',
-     type: ['restaurant']
-   };
+    request = {
+        location: SF,
+        radius: '2000',
+        type: ['restaurant']
+    };
 
-//initiates nearbysearches on load map
-// service = new google.maps.places.PlacesService(map);
-// service.nearbySearch(request, callback);
-var geocoder = new google.maps.Geocoder();
+    //initiates nearbysearches on load map
+    // service = new google.maps.places.PlacesService(map);
+    // service.nearbySearch(request, callback);
+    var geocoder = new google.maps.Geocoder();
 
-// on click adds markers maybe needed for future use
-// map.addListener('rightclick', function(event) {
-//       addMarker(event.latLng);
-//     });
+    // on click adds markers maybe needed for future use
+    // map.addListener('rightclick', function(event) {
+    //       addMarker(event.latLng);
+    //     });
 
-   //buttons that run through geocoder functions on click
-   document.getElementById('submit1').addEventListener('click', function() {
-     geocodeAddress1(geocoder, map); 
-   });
-   document.getElementById('submit2').addEventListener('click', function() {
-     geocodeAddress2(geocoder, map);
-   });
-   document.getElementById('submit3').addEventListener('click', function() {
-     geocodeAddress3(geocoder, map);
-   });
-
- }
+    //buttons that run through geocoder functions on click
+    document.getElementById('submit1').addEventListener('click', function() {
+        geocodeAddress1(geocoder, map);
+    });
+    document.getElementById('submit2').addEventListener('click', function() {
+        geocodeAddress2(geocoder, map);
+    });
+    document.getElementById('submit3').addEventListener('click', function() {
+        geocodeAddress3(geocoder, map);
+    });
+}
 
 //getting results of all places 
 function callback(results, status) {
- if (status == google.maps.places.PlacesServiceStatus.OK) {
-  console.log(results)
-  for (var i = 0; i < results.length; i++) {
-   markers.push(createMarker(results[i]));
- }
-}
+    if (status == google.maps.places.PlacesServiceStatus.OK) {
+        console.log(results)
+        for (var i = 0; i < results.length; i++) {
+            markers.push(createMarker(results[i]));
+        }
+    }
 }
 
 //creating markers for all places
 function createMarker(place) {
- marker = new google.maps.Marker({
-   map: map,
-   position: place.geometry.location
- });
- google.maps.event.addListener(marker, 'click', function() {
-   infowindow.setContent("<h6>" + place.name + "</h6>" + "<b>" + "<p>" + place.vicinity + "</br>" + "</p>" + "rating: " + place.rating.toString(10) + "</b>" );
-   infowindow.open(map, this);
- });
- return marker;
+    marker = new google.maps.Marker({
+        map: map,
+        position: place.geometry.location
+    });
+    google.maps.event.addListener(marker, 'click', function() {
+        infowindow.setContent("<h6>" + place.name + "</h6>" + "<b>" + "<p>" + place.vicinity + "</br>" + "</p>" + "rating: " + place.rating.toString(10) + "</b>");
+        infowindow.open(map, this);
+    });
+    return marker;
 }
 
 // Removes the markers from the map
 function clearResults(markers) {
-  for (var m in markers){
-    markers[m].setMap(null)
-  }
-  markers = []
+    for (var m in markers) {
+        markers[m].setMap(null)
+    }
+    markers = []
 }
 
 //on search creates a new map removes old markers creates new ones
 function geocodeAddress1(geocoder, resultsMap) {
-  var address = document.getElementById('address').value;
-  if (!address) {
-    clearResults(markers)
-    request = {
-      location: { lat: map.getCenter().lat(), lng: map.getCenter().lng() },
-      radius: '2000',
-      type: ['restaurant']
-    }; 
-    service = new google.maps.places.PlacesService(resultsMap);
-    service.nearbySearch(request, callback);
-  } else {
-   geocoder.geocode({'address': address}, function(results, status) {
-    if (status === 'OK') {
-      clearResults(markers)
-      resultsMap.setCenter(results[0].geometry.location); 
-      resultsMap.setZoom(14);
-      request = {
-        location: results[0].geometry.location,
-        radius: '2000',
-        type: ['restaurant']
-      }; 
-      service = new google.maps.places.PlacesService(resultsMap);
-      service.nearbySearch(request, callback);
+    var address = document.getElementById('address').value;
+    if (!address) {
+        clearResults(markers)
+        request = {
+            location: {
+                lat: map.getCenter().lat(),
+                lng: map.getCenter().lng()
+            },
+            radius: '2000',
+            type: ['restaurant']
+        };
+        service = new google.maps.places.PlacesService(resultsMap);
+        service.nearbySearch(request, callback);
     } else {
-      alert('Geocode was not successful for the following reason: ' + status);
+        geocoder.geocode({
+            'address': address
+        }, function(results, status) {
+            if (status === 'OK') {
+                clearResults(markers)
+                resultsMap.setCenter(results[0].geometry.location);
+                resultsMap.setZoom(14);
+                request = {
+                    location: results[0].geometry.location,
+                    radius: '2000',
+                    type: ['restaurant']
+                };
+                service = new google.maps.places.PlacesService(resultsMap);
+                service.nearbySearch(request, callback);
+            } else {
+                alert('Geocode was not successful for the following reason: ' + status);
+            }
+        });
     }
-  });
- }
 }
 
 function geocodeAddress2(geocoder, resultsMap) {
-  var address = document.getElementById('address').value;
-  if (!address) {
-    clearResults(markers)
-    request = {
-      location: { lat: map.getCenter().lat(), lng: map.getCenter().lng() },
-      radius: '2000',
-      type: ['night_club']
-    }; 
-    service = new google.maps.places.PlacesService(resultsMap);
-    service.nearbySearch(request, callback);
-  } else {
-   geocoder.geocode({'address': address}, function(results, status) {
-    if (status === 'OK') {
-      clearResults(markers)
-      resultsMap.setCenter(results[0].geometry.location); 
-      resultsMap.setZoom(14);
-      request = {
-        location: results[0].geometry.location,
-        radius: '2000',
-        type: ['night_club']
-      }; 
-      service = new google.maps.places.PlacesService(resultsMap);
-      service.nearbySearch(request, callback);
+    var address = document.getElementById('address').value;
+    if (!address) {
+        clearResults(markers)
+        request = {
+            location: {
+                lat: map.getCenter().lat(),
+                lng: map.getCenter().lng()
+            },
+            radius: '2000',
+            type: ['night_club']
+        };
+        service = new google.maps.places.PlacesService(resultsMap);
+        service.nearbySearch(request, callback);
     } else {
-      alert('Geocode was not successful for the following reason: ' + status);
+        geocoder.geocode({
+            'address': address
+        }, function(results, status) {
+            if (status === 'OK') {
+                clearResults(markers)
+                resultsMap.setCenter(results[0].geometry.location);
+                resultsMap.setZoom(14);
+                request = {
+                    location: results[0].geometry.location,
+                    radius: '2000',
+                    type: ['night_club']
+                };
+                service = new google.maps.places.PlacesService(resultsMap);
+                service.nearbySearch(request, callback);
+            } else {
+                alert('Geocode was not successful for the following reason: ' + status);
+            }
+        });
     }
-  });
- }
 }
 
 function geocodeAddress3(geocoder, resultsMap) {
-  var address = document.getElementById('address').value;
-  if (!address) {
-    clearResults(markers)
-    request = {
-      location: { lat: map.getCenter().lat(), lng: map.getCenter().lng() },
-      radius: '2000',
-      type: ['gym']
-    }; 
-    service = new google.maps.places.PlacesService(resultsMap);
-    service.nearbySearch(request, callback);
-  } else {
-   geocoder.geocode({'address': address}, function(results, status) {
-    if (status === 'OK') {
-      clearResults(markers)
-      resultsMap.setCenter(results[0].geometry.location); 
-      resultsMap.setZoom(14);
-      request = {
-        location: results[0].geometry.location,
-        radius: '2000',
-        type: ['gym']
-      }; 
-      service = new google.maps.places.PlacesService(resultsMap);
-      service.nearbySearch(request, callback);
+    var address = document.getElementById('address').value;
+    if (!address) {
+        clearResults(markers)
+        request = {
+            location: {
+                lat: map.getCenter().lat(),
+                lng: map.getCenter().lng()
+            },
+            radius: '2000',
+            type: ['gym']
+        };
+        service = new google.maps.places.PlacesService(resultsMap);
+        service.nearbySearch(request, callback);
     } else {
-      alert('Geocode was not successful for the following reason: ' + status);
+        geocoder.geocode({
+            'address': address
+        }, function(results, status) {
+            if (status === 'OK') {
+                clearResults(markers)
+                resultsMap.setCenter(results[0].geometry.location);
+                resultsMap.setZoom(14);
+                request = {
+                    location: results[0].geometry.location,
+                    radius: '2000',
+                    type: ['gym']
+                };
+                service = new google.maps.places.PlacesService(resultsMap);
+                service.nearbySearch(request, callback);
+            } else {
+                alert('Geocode was not successful for the following reason: ' + status);
+            }
+        });
     }
-  });
- }
-}
-
-
+} 
 </script>
-
-<!--------------- dont mind code below this line :) ------------->
-<!--------------- dont mind code below this line :) ------------->
-<!--------------- dont mind code below this line :) ------------->
-<!--------------- dont mind code below this line :) ------------->
-<!--------------- dont mind code below this line :) ------------->
-<!--------------- dont mind code below this line :) ------------->
-<!--------------- dont mind code below this line :) ------------->
-<!--------------- dont mind code below this line :) ------------->
-<!--------------- dont mind code below this line :) ------------->
-<!--------------- dont mind code below this line :) ------------->
-<!--------------- dont mind code below this line :) ------------->
-
 <script src="assets/js/core/popper.min.js"></script>
 <script src="assets/js/core/bootstrap-material-design.min.js"></script>
 <script src="assets/js/plugins/perfect-scrollbar.jquery.min.js"></script>

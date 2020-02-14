@@ -170,7 +170,6 @@
                   Justin
                 </a>
               </li>
-
             </ul>
           </nav>
         </div>
@@ -324,7 +323,7 @@ var busySettings = 0;
           $('.card-category').text(searchVal)
 
           // Gets API Key from google using heroku proxy
-          b = "https://cors-anywhere.herokuapp.com/https://maps.googleapis.com/maps/api/geocode/json?address=" + searchVal + "&key=AIzaSyDrl0KCEd2hNyQKYhzlyEvqQUtM4-nFMrg"
+          b = "https://cors-anywhere.herokuapp.com/https://maps.googleapis.com/maps/api/geocode/json?address=" + searchVal + "&key=AIzaSyBY4U1wnLT6sSZtTMPYZf0KweU5jRSl_FM"
 
           $.ajax({
             url: b,
@@ -357,7 +356,7 @@ var busySettings = 0;
           $('.card-title').text(categories.c[n])
 
           // Gets API Key from google using heroku proxy
-          u = "https://cors-anywhere.herokuapp.com/https://maps.googleapis.com/maps/api/place/textsearch/json?query=" + categories.c[n] + "&location=" + lat + "," + lng + "&radius=10000&key=AIzaSyA70uxLUiPmNhaUIcu8zo3rH-7vzJbdxV0"
+          u = "https://cors-anywhere.herokuapp.com/https://maps.googleapis.com/maps/api/place/textsearch/json?query=" + categories.c[n] + "&location=" + lat + "," + lng + "&radius=10000&key=AIzaSyBY4U1wnLT6sSZtTMPYZf0KweU5jRSl_FM"
           // Placeholder for SF lat long 37.7749,-122.4194
 
           $.ajax({
@@ -420,21 +419,6 @@ var busySettings = 0;
         }
 
       </script>
-
-
-<!--------------- dont mind code below this line :) ------------->
-<!--------------- dont mind code below this line :) ------------->
-<!--------------- dont mind code below this line :) ------------->
-<!--------------- dont mind code below this line :) ------------->
-<!--------------- dont mind code below this line :) ------------->
-<!--------------- dont mind code below this line :) ------------->
-<!--------------- dont mind code below this line :) ------------->
-<!--------------- dont mind code below this line :) ------------->
-<!--------------- dont mind code below this line :) ------------->
-<!--------------- dont mind code below this line :) ------------->
-<!--------------- dont mind code below this line :) ------------->
-
-
       <!--   Core JS Files   -->
       <script src="assets/js/core/jquery.min.js"></script>
       <script src="assets/js/core/popper.min.js"></script>
